@@ -1,4 +1,15 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+
+:root{
+  --primary-white: #fff;
+  --primary-yellow: #eff311;
+}
+
+*{
+  font-family: 'Roboto Condesed', sans-serif;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +46,52 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+/* ////////////////////////////// NAVBAR //////////////////////////////// */
+
+
+nav a.nav-link{
+   font-weight: 300; 
+    letter-spacing: 0.9px;
+  cursor: pointer
+} 
+
+nav ul li{
+  text-transform: uppercase;
 }
+
+.navbar-nav >li >a{
+   margin-right: 25px;
+  margin-left : 25px;
+   color: var(--primary-white) !important; 
+   border-top: 0.1875rem solid #212529;
+}
+
+.navbar-brand .logo{
+  padding: 2px !important;
+  height: 4rem !important;
+  font-size: 33px;
+}
+
+
+.borderlight:hover{
+  border-top: 0.1875rem solid var(--primary-yellow);
+}  
+
+.myversion{
+ /* background-color: red; */
+ font-size: 30px !important;
+ font-weight: 600 !important;
+}
+
+/* .logo{
+  background: url('./Assets/logo.png') 0 0 no-repeat;
+  width: 140px;
+  height: 50px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+} */
