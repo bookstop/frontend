@@ -1,5 +1,9 @@
 
 export default function Nav(){
+
+    const hello=()=>{
+      
+    }
     return(
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand myversion" href="#"><img className='logo ' />BOOK STOP 📚</a>
