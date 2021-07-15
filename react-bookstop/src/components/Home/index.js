@@ -1,10 +1,12 @@
 import ReadBooks from "../ReadBooks";
+import WishList from "../WishList";
 
-const Home = ({ users, getUsers }) => {
+const Home = () => {
 
     return (
         <div>
             <ReadBooks />
+            <WishList />
         </div>
     )
 };

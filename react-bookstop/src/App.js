@@ -4,28 +4,33 @@ import 'bootstrap/dist/css/bootstrap.min.css';   //minimizing bootstrap use
 import Navbar from './components/NavBar';
 
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import Home from './components/Home';
 
+export const UserContext = createContext(); 
 
 function App() {
-  const [users, setUsers] = useState([]);
-  
+  const [user, setUser] = useState(false);
+  const userName = 'Test 1-1';
+
   // api call for users & logic to check if user is logged in
-  const getUsers = async () => {
+  const getUser = async () => {
     try {
       const API_ENDPOINT = 'http://localhost:4000/users';
       const response = await fetch (API_ENDPOINT);
       const data = await response.json();
-      setUsers(data);
-      console.log(data);
+      const currentUser  = data.find((user) => {
+        return user.username === userName;
+      })
+      setUser(currentUser);
+      console.log(currentUser);
     } catch (err) {
       console.log(err)
     }
   };
 
   useEffect(() => {
-    getUsers();
+    getUser();
   }, []);
 
   return (
@@ -34,10 +39,15 @@ function App() {
       <Navbar/>
       <main>
         <Switch>
-          <Route
-            path='/'
-            render={() => <Home getUsers={getUsers} users={users} />}
-          />
+          <UserContext.Provider value={{
+            user, 
+            getUser
+          }}>
+            <Route
+              path='/'
+              component={Home}
+            />
+          </UserContext.Provider>
         </Switch>
       </main>
     </BrowserRouter>
