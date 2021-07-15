@@ -4,7 +4,24 @@ import { useState, useEffect } from 'react';
 import Home from './components/Home';
 
 function App() {
-  // main api call
+  const [users, setUsers] = useState([]);
+  
+  // api call for users & logic to check if user is logged in
+  const getUsers = async () => {
+    try {
+      const API_ENDPOINT = 'http://localhost:4000/users';
+      const response = await fetch (API_ENDPOINT);
+      const data = await response.json();
+      setUsers(data);
+      console.log(data);
+    } catch (err) {
+      console.log(err)
+    }
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -15,7 +32,7 @@ function App() {
         <Switch>
           <Route
             path='/'
-            render={() => <Home />}
+            render={() => <Home getUsers={getUsers} users={users} />}
           />
         </Switch>
       </main>

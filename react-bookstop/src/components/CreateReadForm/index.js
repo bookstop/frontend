@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const CreateReadForm = () => {
+const CreateReadForm = ({ getReadBooksData }) => {
     const initialFormValues = {
         title: '',
         author: '',
@@ -23,7 +23,17 @@ const CreateReadForm = () => {
     const _createNewReadBook = async (e) => {
         e.preventDefault();
         try {
-
+            const API_ENDPOINT = 'http://localhost:4000/read-books';
+            const response = await fetch(API_ENDPOINT, {
+                method: 'POST',
+                body: JSON.stringify(values),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+            if (response.status === 201)
+                getReadBooksData();
+                setValues(initialFormValues);
         } catch (err) {
             console.log(err)
         }

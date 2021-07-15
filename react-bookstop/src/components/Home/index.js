@@ -1,9 +1,11 @@
-import CreateWishListForm from '../CreateWishListForm';
+import ReadBooks from "../ReadBooks";
 
-const Home = () => {
+const Home = ({ users, getUsers }) => {
 
     return (
-        <CreateWishListForm />
+        <div>
+            <ReadBooks />
+        </div>
     )
 };
 
