@@ -1,7 +1,12 @@
 import './App.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';   //minimizing bootstrap use 
+import Navbar from './components/NavBar';
+
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Home from './components/Home';
+
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -24,10 +29,9 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <nav>
 
-      </nav>
+    <BrowserRouter>
+      <Navbar/>
       <main>
         <Switch>
           <Route
