@@ -1,0 +1,11 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#0B350D",
+        "titleBar.activeBackground": "#104B12",
+        "titleBar.activeForeground": "#F4FDF5"
+    },
+    "cSpell.words": [
+        "books",
+        "read"
+    ]
+}
