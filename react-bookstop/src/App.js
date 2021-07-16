@@ -45,6 +45,10 @@ function App() {
             getUser
           }}>
             <Route
+              path='/register'
+              component={Home}
+            />
+            <Route
               path='/'
               component={Home}
             />
