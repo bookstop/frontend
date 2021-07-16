@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react";
 import CreateReadForm from "../CreateReadForm";
+import { useContext } from "react";
+import { UserContext } from '../../App';
 
 const ReadBooks = () => {
-    const [readBooks, setReadBooks] = useState([]);
-
-    const getReadBooksData = async () => {
-        const API_ENDPOINT = 'http://localhost:4000/read-books/:userId';
-        try {
-            const response = await fetch(API_ENDPOINT);
-            const data = await res.json();
-            setReadBooks(data);
-        } catch (err) {
-            console.log(err)
-        }
-      };
-
-      useEffect(() => {
-          getReadBooksData();
-      }, []);
-
+    const userContext = useContext(UserContext);
+    console.log('user context is:', userContext)
+    // console.log(UserContext);
       return (
-          <CreateReadForm />
+          <div>
+            <CreateReadForm />
+                {!userContext.user ? <h2>Not logged in</h2> : 
+                    userContext.user.readBook.map((book) => {
+                        return (
+                            <div key={book._id}>
+                                <h2>{book.title}</h2>
+                                <h3>{book.author}</h3>
+                            </div>
+                        )
+                    })
+
+                }    
+            </div>
       )
 }
 

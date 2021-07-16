@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../../App';
 
-const CreateReadForm = ({ getReadBooksData }) => {
+const CreateReadForm = () => {
+    const userContext = useContext(UserContext);
+
     const initialFormValues = {
         title: '',
         author: '',
@@ -26,13 +29,18 @@ const CreateReadForm = ({ getReadBooksData }) => {
             const API_ENDPOINT = 'http://localhost:4000/read-books';
             const response = await fetch(API_ENDPOINT, {
                 method: 'POST',
-                body: JSON.stringify(values),
+                body: JSON.stringify({
+                    title: values.title,
+                    author: values.author,
+                    review: values.review,
+                    userId: userContext.user._id,
+                }),
                 headers: {
                     'Content-Type': 'application/json'
                 },
             });
             if (response.status === 201)
-                getReadBooksData();
+                userContext.getUser();
                 setValues(initialFormValues);
         } catch (err) {
             console.log(err)
