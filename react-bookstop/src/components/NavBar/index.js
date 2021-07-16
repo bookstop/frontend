@@ -25,10 +25,11 @@ export default function Nav(){
         <Link className="nav-link borderlight Link" to="/login">Log In</Link>
         </li>
         <li className="nav-item">
-        <Link className="nav-link borderlight Link" to="/regiser">Register</Link>
+        <Link className="nav-link borderlight Link" to="/register">Register</Link>
         </li>
-        
-        
+        <li className="nav-item">
+        <a className="nav-link borderlight" href="/login">Login</a>
+        </li>            
         </ul>
                 
         </div>

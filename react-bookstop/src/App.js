@@ -1,5 +1,5 @@
 import './App.css';
-
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';   //minimizing bootstrap use 
 import Navbar from './components/NavBar';
 import SearchForm from './components/SearchForm';
@@ -7,14 +7,59 @@ import RegisterForm from './components/RegisterForm';
 import ReadBooks from './components/ReadBooks';
 
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, useContext, useReducer } from 'react';
 import Home from './components/Home';
+import LoginForm from './components/LoginForm';
 
-export const UserContext = createContext(); 
+export const UserContext = React.createContext(); 
+
+// Declare two global useContext contexts yo pass state and dispatch context to lower components
+export const UserAuthStateContext = React.createContext();
+export const UserAuthDispatchContext = React.createContext();
 
 function App() {
   const [user, setUser] = useState(false);
   const userName = 'Test 1-1';
+  
+  /*====================================================
+    Login and user session related components
+  =====================================================*/
+
+  // To initialize the user authentication state
+  const initialUserAuth = {
+    _id: '',
+    state: '',
+    lastAccess: '',
+  }
+
+  // This useReducer hooks calls local functions to handle the requested actions
+  function userReducer(state, action) {
+    switch (action.type) {
+      case 'Login':
+        return {
+          _id: "1",
+          state: "2",
+          lastAccess: "3",
+        };
+      case 'Logout':
+        return {
+          _id: '',
+          state: '',
+          lastAccess: '',      
+        };
+      case 'Update Status':
+        return {
+          _id: 'u1',
+          state: 'u2',
+          lastAccess: 'u3',      
+        };        
+      default:
+        throw new Error();
+    }
+  }
+
+  // This defines the initial user authentication object and the user auth reducer
+  const [userAuth, dispatch] = useReducer(userReducer, initialUserAuth);
 
   // api call for users & logic to check if user is logged in
   const getUser = async () => {
@@ -37,7 +82,11 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+
+  <BrowserRouter>
+    <UserAuthStateContext.Provider value={userAuth}>
+      <UserAuthDispatchContext.Provider value={dispatch}>   
+
       <Navbar/>
       <SearchForm/>
       <main>
@@ -54,11 +103,12 @@ function App() {
               path='/home'
               component={Home}
             />
-            
-
           </UserContext.Provider>
         </Switch>
       </main>
+
+       </UserAuthDispatchContext.Provider>
+      </UserAuthStateContext.Provider>
     </BrowserRouter>
   );
 }
