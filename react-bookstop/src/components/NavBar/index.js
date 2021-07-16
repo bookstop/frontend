@@ -15,14 +15,17 @@ export default function Nav(){
         <li className="nav-item active">
         <Link className="nav-link borderlight Link" to="/home">Home <span className="sr-only"></span></Link>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
         <Link className="nav-link borderlight Link" to="/read">Reads</Link>
         </li>
         <li className="nav-item">
         <Link className="nav-link borderlight Link" to="/wishlist">Wish List</Link>
+        </li> */}
+        <li className="nav-item">
+        <Link className="nav-link borderlight Link" to="/login">Log In</Link>
         </li>
         <li className="nav-item">
-        <Link className="nav-link borderlight Link" to="/login">Login</Link>
+        <Link className="nav-link borderlight Link" to="/regiser">Register</Link>
         </li>
         
         
