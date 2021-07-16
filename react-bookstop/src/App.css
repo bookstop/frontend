@@ -2,7 +2,7 @@
 
 :root{
   --primary-white: #fff;
-  --primary-yellow: #dc3545;
+  --primary-yellow: rgb(255, 249, 82);
 }
 
 *{
@@ -87,6 +87,18 @@ nav ul li{
 }
 .login{
   border: 0.1875rem solid var(--primary-yellow);
+}
+
+.newlogo{
+  /* background: url("./Assets/logo.png") no-repeat;  */
+  width: 80px; 
+  height: 80px; 
+  display: block; 
+  /* text-indent: -9999px;  */
+     position: relative;
+     align-self: center;
+     background-color: red;
+      border-radius: 80%;
 }
 /* .logo{
   background: url('./Assets/logo.png') 0 0 no-repeat;
