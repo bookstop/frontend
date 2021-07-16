@@ -1,17 +1,18 @@
 import './App.css';
-
 import 'bootstrap/dist/css/bootstrap.min.css';   //minimizing bootstrap use 
-import Navbar from './components/NavBar';
 
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { useState, useEffect, createContext } from 'react';
+
+import Navbar from './components/NavBar';
 import Home from './components/Home';
+import EditForm from './components/EditForm';
 
 export const UserContext = createContext(); 
 
 function App() {
   const [user, setUser] = useState(false);
-  const userName = 'Test 1-1';
+  const userName = 'TEST-1';
 
   // api call for users & logic to check if user is logged in
   const getUser = async () => {
@@ -46,6 +47,12 @@ function App() {
             <Route
               path='/'
               component={Home}
+            />
+            <Route
+              path='/read-books/:bookId'
+              render={(routerProps) => (
+                <EditForm match={routerProps.match} />
+              )}
             />
           </UserContext.Provider>
         </Switch>
