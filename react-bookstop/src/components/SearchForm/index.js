@@ -9,6 +9,8 @@ export default function SearchForm(){
 
 
 
+
+
   
    function handleChange(event){
        event.preventDefault()
@@ -38,9 +40,35 @@ export default function SearchForm(){
                 </div>
                 <button type='submit' className='btn btn-danger'>Search</button>
             </form>
-            {result.map(book=>{
-                <img src={book.volumeInfo.imageLinks.thumbnail} alt='books'/>
+            <section className='box-area'>
+            {result.map((booked)=>{
+                return(
+                   
+                 <article  className='single-box' key={booked.volumeInfo.id}>
+                     <div className='img-area'>
+                         <img className='' src={booked.volumeInfo.imageLinks.thumbnail} alt={booked.volumeInfo.title}/>
+                     </div>
+                     <div>
+                         <h3 className='inner-box'>{booked.volumeInfo.title}</h3>
+                         {/* <p className='overflow-auto'>{booked.volumeInfo.description}</p> */}
+                         <p>
+                         <span className='font-bold'>Author: </span>
+                         {booked.volumeInfo.authors}</p>
+                     </div>
+                     <ul>
+                         
+                         <li><span className='font-bold'> Publisher :</span> {booked.volumeInfo.publisher}</li>
+                         <span></span>
+                         <li><span className='font-bold '> Published Date : </span> {booked.volumeInfo.publishedDate}</li>
+                         <span></span>
+                         <li><span className='font-bold'> Categories : </span>{booked.volumeInfo.categories}</li>
+                     </ul>
+                     <a target='_blank' href={booked.volumeInfo.previewLink} className=' item-center btn btn-danger'>Buy Book</a>
+                 </article>
+                 
+                )
             })}
+            </section>
         </div>
     )
 }
