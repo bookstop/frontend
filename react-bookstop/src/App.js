@@ -2,6 +2,7 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';   //minimizing bootstrap use 
 import Navbar from './components/NavBar';
+import SearchForm from './components/SearchForm';
 
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { useState, useEffect, createContext } from 'react';
@@ -34,9 +35,9 @@ function App() {
   }, []);
 
   return (
-
     <BrowserRouter>
       <Navbar/>
+      <SearchForm/>
       <main>
         <Switch>
           <UserContext.Provider value={{
