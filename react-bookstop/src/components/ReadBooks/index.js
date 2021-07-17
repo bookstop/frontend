@@ -3,10 +3,12 @@ import { useContext } from "react";
 import { UserContext } from '../../App';
 
 const ReadBooks = () => {
+
     const userContext = useContext(UserContext);
-    console.log('user context is:', userContext)
+    // console.log('user context is:', userContext)
     // console.log(UserContext);
-      return (
+
+    return (
           <div>
             <CreateReadForm />
                 {!userContext.user ? <h2>Not logged in</h2> : 

@@ -5,7 +5,7 @@ const LoginForm = (props) => {
 
     const userAuth = useContext(UserAuthStateContext);
     const userDispatch = useContext(UserAuthDispatchContext);
-
+ 
     // handle user form login request 
     const _handleUserLogin = async (event) => {
         event.preventDefault();
@@ -17,12 +17,13 @@ const LoginForm = (props) => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-            });
-            if (response.status === 201) {
-                localStorage.setItem('BookStopUser', JSON.stringify(response.body));
+            });     
+            const data = await response.json();
+            if (response.status === 200) {
+                localStorage.setItem('BookStopUser', data._id );
                 // localStorage.removeItem('BookStopUser');
                 // localStorage.getItem('BookStopUser');
-                userDispatch("Login", values);
+                userDispatch({"type":"Login", "login": data} );
             }
         } catch (err) {
             console.log(err)
