@@ -1,11 +1,14 @@
-import {
-  Link
-} from "react-router-dom";
+import { useContext } from 'react';
+import { Link } from "react-router-dom";
+import { UserAuthStateContext } from '../../App';
+
 export default function Nav(){
+
+  const userAuth = useContext(UserAuthStateContext);
 
     return(
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <Link  className="navbar-brand myversion Link" href="/home"><img className='logo ' />BOOK STOP 📚</Link>
+        <Link  className="navbar-brand myversion Link" to="/home"><img className='logo ' alt="Logo"/>BOOK STOP 📚</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
         </button>
@@ -21,15 +24,25 @@ export default function Nav(){
         <li className="nav-item">
         <Link className="nav-link borderlight Link" to="/wishlist">Wish List</Link>
         </li> */}
-        <li className="nav-item">
-        <Link className="nav-link borderlight Link" to="/login">Log In</Link>
-        </li>
+
+        { ((!userAuth) || (userAuth.status!=='Active') || ((Date.now()-userAuth.lastAccess)>900) ) ? (
+            <li className="nav-item">
+            <Link className="nav-link borderlight Link" to="/login">Log In</Link>
+            </li>
+          )  :  (
+            <>
+            <li className="nav-item">
+            <Link className="nav-link borderlight Link" to="/">Welcome, {userAuth.firstName} {userAuth.lastName}</Link>
+            </li>
+            <li className="nav-item">
+            <Link className="nav-link borderlight Link" to="/logout">Log Out</Link>
+            </li>
+            </>            
+          )
+        }
         <li className="nav-item">
         <Link className="nav-link borderlight Link" to="/register">Register</Link>
-        </li>
-        <li className="nav-item">
-        <a className="nav-link borderlight" href="/login">Login</a>
-        </li>            
+        </li> 
         </ul>
                 
         </div>

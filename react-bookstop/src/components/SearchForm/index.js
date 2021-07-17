@@ -63,7 +63,7 @@ export default function SearchForm(){
                          <span></span>
                          <li><span className='font-bold'> Categories : </span>{booked.volumeInfo.categories}</li>
                      </ul>
-                     <a target='_blank' href={booked.volumeInfo.previewLink} className=' item-center btn btn-danger'>Buy Book</a>
+                     <a target='_blank' rel="noreferrer" href={booked.volumeInfo.previewLink} className=' item-center btn btn-danger'>Buy Book</a>
                  </article>
                  
                 )

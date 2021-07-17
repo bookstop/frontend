@@ -66,7 +66,7 @@ const CreateReadForm = () => {
                         id='author'
                         value={values.author}
                         onChange={_handleChange}
-                        unique
+                        required
                     />
             </div>
             <div>
