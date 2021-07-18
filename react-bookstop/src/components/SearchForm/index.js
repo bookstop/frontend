@@ -32,14 +32,17 @@ export default function SearchForm(){
 },[]);
 
     return(
-        <div className='container'>
-            <h1>Search For Your FAV Book</h1>
+        <div className=''>
+            <div className='search-book'>
+            <h1 className='heading-list wish-list-heading'>Search Book</h1>
+            <p className='heading-p '>Search For Your FAV Book</p>
             <form onSubmit={handleSubmit}>
-                <div className='form-group'>
-                    <input type='text' onChange={handleChange} className='input-control mt-10' placeholder='Search for books' />
+                <div className='searchTerm form-group'>
+                    <input type='text' onChange={handleChange} className='input-control mt-10 search-option ' placeholder='Search for books' />
                 </div>
-                <button type='submit' className='btn btn-danger'>Search</button>
+                <button type='submit' className='btn btn-danger btn-lg'>Search Books</button>
             </form>
+            </div>
             <section className='box-area'>
             {result.map((booked)=>{
                 return(
