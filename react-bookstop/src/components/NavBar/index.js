@@ -1,14 +1,18 @@
 import { useContext } from 'react';
 import { Link } from "react-router-dom";
-import { UserAuthStateContext } from '../../App';
+import Logo from "../../Assets/logo_v2.png"
+import { UserAuthStatusContext } from '../../App';
+
 
 export default function Nav(){
 
-  const userAuth = useContext(UserAuthStateContext);
+  const userAuth = useContext(UserAuthStatusContext);
 
     return(
+
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <Link  className="navbar-brand myversion Link" to="/home"><img className='logo ' alt="Logo"/>BOOK STOP 📚</Link>
+
+        <Link  className="navbar-brand myversion Link" to="/home"><img className='logo' src={Logo} alt="Logo"/> BOOKSTOP 📚</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
         </button>
@@ -25,7 +29,7 @@ export default function Nav(){
         <Link className="nav-link borderlight Link" to="/wishlist">Wish List</Link>
         </li> */}
 
-        { ((!userAuth) || (userAuth.status!=='Active') || ((Date.now()-userAuth.lastAccess)>900) ) ? (
+        { ((!userAuth) || (userAuth.status!=='active') || ((Date.now()-userAuth.lastAccess)>900) ) ? (
             <li className="nav-item">
             <Link className="nav-link borderlight Link" to="/login">Log In</Link>
             </li>
@@ -40,6 +44,7 @@ export default function Nav(){
             </>            
           )
         }
+        
         <li className="nav-item">
         <Link className="nav-link borderlight Link" to="/register">Register</Link>
         </li> 
@@ -49,3 +54,6 @@ export default function Nav(){
       </nav>
   )
 }
+
+
+
