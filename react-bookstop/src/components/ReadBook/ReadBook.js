@@ -1,4 +1,5 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import { UserContext } from '../../App';
 
 const ReadBook = () => {
     const userContext = useContext(UserContext);
@@ -14,8 +15,12 @@ const ReadBook = () => {
         }
     }
 
-    return (
+    useEffect(() => {
+        getBook();
+    }, []);
 
+    return (
+        <h1>this is a book</h1>
     )
 };
 

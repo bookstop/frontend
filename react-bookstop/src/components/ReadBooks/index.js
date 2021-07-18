@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 const ReadBooks = () => {
     const userContext = useContext(UserContext);
-    console.log('user context is:', userContext)
-    console.log(UserContext);
+    // console.log('user context is:', userContext)
+    // console.log(UserContext);
       return (
           <div>
             <CreateReadForm />
@@ -14,7 +14,7 @@ const ReadBooks = () => {
                     userContext.user.readBook.map((book) => {
                         return (
                             <div key={book._id} className="book-list">
-                                <Link to={`/book/${book._id}`}>
+                                <Link to={`/read-books/edit/${book._id}`}>
                                     <h2>{book.title}</h2>
                                 </Link>
                                     <h3>{book.author}</h3>

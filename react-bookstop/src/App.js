@@ -7,6 +7,7 @@ import { useState, useEffect, createContext } from 'react';
 import Navbar from './components/NavBar';
 import Home from './components/Home';
 import EditForm from './components/EditForm';
+import ReadBook from './components/ReadBook/ReadBook';
 
 export const UserContext = createContext(); 
 
@@ -49,10 +50,14 @@ function App() {
               component={Home}
             />
             <Route
-              path='/read-books/:bookId'
+              path='/read-books/edit/:bookId'
               render={(routerProps) => (
                 <EditForm match={routerProps.match} />
               )}
+            />
+            <Route
+              path='/read-books/:bookId'
+              component={ReadBook}
             />
           </UserContext.Provider>
         </Switch>
