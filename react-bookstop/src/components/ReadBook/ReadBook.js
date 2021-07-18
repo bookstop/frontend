@@ -1,15 +1,17 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
 
-const ReadBook = () => {
+const ReadBook = (props) => {
     const userContext = useContext(UserContext);
+    const [currentBook, setCurrentBook] = useState(null);
 
     const getBook = async () => {
         try {
-            const API_ENDPOINT = `http://localhost:4000/read-books/${userContext.user.book._id}`;
+            const API_ENDPOINT = `http://localhost:4000/read-books/book/${props.match.params.bookId}`;
             const response = await fetch(API_ENDPOINT);
             const data = await response.json();
-            
+            console.log(data);
+            setCurrentBook(data);
         } catch (err) {
             console.log(err);
         }
@@ -20,7 +22,11 @@ const ReadBook = () => {
     }, []);
 
     return (
-        <h1>this is a book</h1>
+        <div>
+            <h1>{currentBook.title}</h1>
+            <h2>{currentBook.author}</h2>
+        </div>
+
     )
 };
 

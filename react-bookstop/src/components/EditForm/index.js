@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import { useHistory } from "react-router-dom";
-// update user form with fields: first name, last name, password, email(not required)
+
 
 const EditForm = ({ match }) => {
     // const userContext = useContext(UserContext);

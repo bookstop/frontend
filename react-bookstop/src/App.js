@@ -46,14 +46,15 @@ function App() {
             getUser
           }}>
             <Route
+              exact
               path='/'
               component={Home}
             />
-            <Route
+            <Route  
               path='/read-books/edit/:bookId'
               render={(routerProps) => (
                 <EditForm match={routerProps.match} />
-              )}
+                )}
             />
             <Route
               path='/read-books/:bookId'
