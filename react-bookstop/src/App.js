@@ -12,6 +12,7 @@ import ReadBooks from './components/ReadBooks';
 import Home from './components/Home';
 import LoginForm from './components/LoginForm';
 import Logout from './components/Logout';
+import Header from './components/Header'
 
 
 // Declare three global useContext contexts to pass state and dispatch context to lower components
@@ -162,7 +163,10 @@ function App() {
         }}>
 
       <Navbar value={userAuth._id}/>
-      <SearchForm/>
+      <Header/>
+      
+      
+     
       <main>
         <Switch>
             <Route
@@ -186,6 +190,8 @@ function App() {
               component={Home}
             />  
         </Switch>
+        <SearchForm/>
+        
       </main>
 
         </UserContext.Provider>

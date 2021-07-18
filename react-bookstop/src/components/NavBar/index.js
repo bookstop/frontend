@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Link } from "react-router-dom";
+import {Linksscroll} from 'react-scroll';
 import Logo from "../../Assets/logo_v2.png"
 import { UserAuthStatusContext } from '../../App';
 
@@ -10,7 +11,7 @@ export default function Nav(){
 
     return(
 
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 
         <Link  className="navbar-brand myversion Link" to="/home"><img className='logo' src={Logo} alt="Logo"/> BOOKSTOP 📚</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,15 +20,18 @@ export default function Nav(){
             
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li className="nav-item active">
+        {/* <li className="nav-item active">
         <Link className="nav-link borderlight Link" to="/home">Home <span className="sr-only"></span></Link>
-        </li>
-        {/* <li className="nav-item">
+        </li> */}
+        <li className="nav-item">
         <Link className="nav-link borderlight Link" to="/read">Reads</Link>
         </li>
         <li className="nav-item">
         <Link className="nav-link borderlight Link" to="/wishlist">Wish List</Link>
-        </li> */}
+        </li>
+        <li className="nav-item">
+        <Link className="nav-link borderlight Link" to="/searchbook">Search Book</Link>
+        </li>
 
         { ((!userAuth) || (userAuth.status!=='active') || ((Date.now()-userAuth.lastAccess)>900) ) ? (
             <li className="nav-item">
