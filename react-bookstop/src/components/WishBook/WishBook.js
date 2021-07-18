@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../App';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const WishBook = (props) => {
-    const userContext = useContext(UserContext);
     const [currentBook, setCurrentBook] = useState(null);
     const API_ENDPOINT = `http://localhost:4000/wish-lists/book/${props.match.params.bookId}`;
     // console.log(props.match.params.bookId);
@@ -12,7 +10,7 @@ const WishBook = (props) => {
         try {
             const response = await fetch(API_ENDPOINT);
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
             setCurrentBook(data);
         } catch (err) {
             console.log(err);
