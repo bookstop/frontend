@@ -1,44 +1,47 @@
-import './App.css';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';   //minimizing bootstrap use 
+import './App.css';
+import { useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { useState, useEffect, useContext, useReducer } from 'react';
+
 import Navbar from './components/NavBar';
 import SearchForm from './components/SearchForm';
 import RegisterForm from './components/RegisterForm';
 import ReadBooks from './components/ReadBooks';
-
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import { useState, useEffect, useContext, useReducer } from 'react';
 import Home from './components/Home';
 import LoginForm from './components/LoginForm';
 import Logout from './components/Logout';
 
-// Declare three global useContext contexts yo pass state and dispatch context to lower components
+
+// Declare three global useContext contexts to pass state and dispatch context to lower components
 export const UserContext = React.createContext(); 
-export const UserAuthStateContext = React.createContext();
+export const UserAuthStatusContext = React.createContext();
 export const UserAuthDispatchContext = React.createContext();
+
 
 function App() {
   
   const [user, setUser] = useState(false);
-
+  let location = useLocation();
+  
   /*====================================================
     Login and user session related components
   =====================================================*/
 
-  // To initialize the user authentication state
+  // To initialize the user authentication status
   const initialUserAuth = {
     _id: '',
     username: '',
     firstName: '',
     lastName: '',
-    state: '',
+    status: '',
     lastAccess: '',
   }
 
   // This useReducer hooks calls local functions to handle the requested actions
   function userReducer(state, action) {
-    console.log("Action follows in reducer:");
-    console.log(action);
+
     switch (action.type) {
       case 'Login':
         return action.login;
@@ -47,7 +50,7 @@ function App() {
       case 'Status':
         return action.login;   
       default:
-        console.log("A uncaught login error was encountered.");
+        return userAuth;
     }
   }
 
@@ -59,10 +62,8 @@ function App() {
 
     // Check to see if the user is already logged in with a valid session
     // Sessions are valid for 30 minutes since the user's last interaction with the site
-    if ( (userAuth) && (userAuth._id) ) {
-      if ( (userAuth.status==='active') && ( (Date.now()-userAuth.lastAccess)<1800) ) {
+    if ( (userAuth) && (userAuth._id) && (userAuth.status==='active') && ( (Date.now()-userAuth.lastAccess)<900) ) {
         return;
-      }
     }
 
     // The user doesn't appear to have an active session in memory.  We can check to see
@@ -80,9 +81,7 @@ function App() {
       const API_ENDPOINT = `http://localhost:4000/users/${userID}`;
       const response = await fetch (API_ENDPOINT);
       const data = await response.json();
-      console.log("Data follows:")
-      console.log(data);
-
+ 
       setUser(data);
 
       const userAuthUpdate = { _id: data._id, 
@@ -93,32 +92,79 @@ function App() {
         lastAccess: Date.now(),
       }
       localStorage.setItem('BookStopUser', data._id );
-      userReducer(userAuth, {"type": "Login", "login": userAuthUpdate});
-    
+      dispatch( {"type": "Login", "login": userAuthUpdate});
+
     } catch (err) {
       console.log(err)
     }
   };
 
+  // Get the logged in user when this page mounts or reloads
   useEffect(() => {
     getUser();
     // eslint-disable-next-line
   }, []);
 
+  // This function simple calls the backend API and updates the user's lastaccess time in seconds since the epoch
+  // We do this so we know when the user is inactive, in which case we consider them logged off.
+
+  const _userSessionKeepAlive = async () => {
+    const API_ENDPOINT = `http://localhost:4000/users/status:${userAuth._id}`;
+    //console.log(values)
+    try {
+        const response = await fetch(API_ENDPOINT, {
+            method: 'PUT',
+            body: JSON.stringify({}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        
+        if (response.status === 200) {
+          const data = await response.json();  
+          const userAuthUpdate = { _id: data._id, 
+            username: data.username,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            status: data.status,
+            lastAccess: Date.now(),
+          }
+          localStorage.setItem('BookStopUser', data._id );
+          dispatch( {"type": "Login", "login": userAuthUpdate});        
+        }
+        else {
+          console.log(`Something went wrong with updating the user's session.`);
+        }
+    } catch (error) {
+        console.error(`Something went wrong with updating the user's session.`);
+        console.error(error)
+    }
+}
+
+  // Whenever there is a change in location we assume the user is continuing their session, so we will update
+  // their lastAccess value in the database, if they are a logged in user.
+  useEffect ( () => {
+    if ( (userAuth) && (userAuth._id) && (userAuth.status==='active') ) { 
+      _userSessionKeepAlive();
+    }
+     // eslint-disable-next-line
+  }, [location] );
+
+
   return (
 
-  <BrowserRouter>
-    <UserAuthStateContext.Provider value={userAuth}>
+    <BrowserRouter>
+    <UserAuthStatusContext.Provider value={userAuth}>
       <UserAuthDispatchContext.Provider value={dispatch}>   
-
-      <Navbar/>
-      <SearchForm/>
-      <main>
-        <Switch>
         <UserContext.Provider value={{
               user, 
               getUser
         }}>
+
+      <Navbar value={userAuth._id}/>
+      <SearchForm/>
+      <main>
+        <Switch>
             <Route
               path='/register'
               component={RegisterForm}
@@ -135,15 +181,38 @@ function App() {
               path='/home'
               component={Home}
             />
-  
-        </UserContext.Provider>
+            <Route
+              path='/'
+              component={Home}
+            />  
         </Switch>
       </main>
 
+        </UserContext.Provider>
        </UserAuthDispatchContext.Provider>
-      </UserAuthStateContext.Provider>
-    </BrowserRouter>
+      </UserAuthStatusContext.Provider>
+      </BrowserRouter>
+
+
   );
+}
+
+// This function stores a file log into local storage in a web storage variable called BookStop.log
+// This provides some unique debugging opportunities to trace events and refreshes when the Web console log
+// may be clearing on the browser.
+
+function storage_log(logValue) {
+
+  const previousValue = localStorage.getItem("BookStop.log");
+
+  if (typeof logValue==='object') {
+    const logValueJSON = JSON.stringify(logValue);
+    localStorage.setItem("BookStop.log", `${previousValue}\n${typeof logValue}\n${logValue}\n${logValueJSON}`);
+  }
+  else {
+    localStorage.setItem("BookStop.log", `${previousValue}\n${typeof logValue}\n${logValue}\n`);
+  }
+
 }
 
 export default App;

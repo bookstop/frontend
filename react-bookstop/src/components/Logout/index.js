@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
-import { UserAuthStateContext, UserAuthDispatchContext } from '../../App';
+import { UserAuthStatusContext, UserAuthDispatchContext } from '../../App';
 
 const Logout = (props) => {
 
-    const userAuth = useContext(UserAuthStateContext);
+    const userAuth = useContext(UserAuthStatusContext);
     const userDispatch = useContext(UserAuthDispatchContext);
  
     // handle user form login request 

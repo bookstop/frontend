@@ -1,13 +1,26 @@
 import { useState, useEffect, useContext } from 'react';
-import { UserAuthStateContext, UserAuthDispatchContext } from '../../App';
+import { useHistory } from "react-router-dom";
+import { UserAuthStatusContext, UserAuthDispatchContext } from '../../App';
+import { Spinner } from '../Spinner';
 
 const LoginForm = (props) => {
 
-    const userAuth = useContext(UserAuthStateContext);
+    const userAuth = useContext(UserAuthStatusContext);
     const userDispatch = useContext(UserAuthDispatchContext);
- 
+    let history = useHistory();
+
+    const initialFormSubmitStatus = {
+        showStatus: false,
+        showSpinner: false,
+        message: "",
+    };
+
+    const [formStatus, setFormStatus] = useState(initialFormSubmitStatus);
+    const [loggedIn, setLoggedIn] = useState(false);
+
     // handle user form login request 
     const _handleUserLogin = async (event) => {
+        setFormStatus({showStatus:true, showSpinner:true, message: ""});
         event.preventDefault();
         try {
             const API_ENDPOINT = 'http://localhost:4000/users/login';
@@ -24,11 +37,26 @@ const LoginForm = (props) => {
                 // localStorage.removeItem('BookStopUser');
                 // localStorage.getItem('BookStopUser');
                 userDispatch({"type":"Login", "login": data} );
+                setFormStatus({showStatus:true, showSpinner:false, message: "You have successfully logged in."});
+                setLoggedIn(true);
+            }
+            else {
+                setFormStatus({showStatus: true, showSpinner:false, message: "Log in failed.  Check your credentials and try again."});
             }
         } catch (err) {
+            setFormStatus({showStatus: true, showSpinner:false, message: "The log in system encountered an error.  Please try again."});
             console.log(err)
         }
     };
+
+    // Upon a successful login, send the user to the /home route after a 2 second delay
+    useEffect(() => {
+        if (loggedIn===true) {
+            setTimeout(() => {
+                history.push('/home');
+            }, 2000);
+        }
+      }, [loggedIn, history]);
 
     // Login form on this component
     const initialFormValues = {
@@ -50,8 +78,10 @@ const LoginForm = (props) => {
 
  
     return (
-        <form onSubmit={_handleUserLogin}>
-            <div>
+
+        <form onSubmit={_handleUserLogin} className="login-form">
+            <h3>Registered User Log In</h3>
+            <fieldset>
                 <label htmlFor='username'>Username: </label>
                     <input
                         type='text'
@@ -60,21 +90,27 @@ const LoginForm = (props) => {
                         onChange={_handleChange}
                         required
                     />  
-            </div>
-            <div>
+            </fieldset>
+            <fieldset>
                 <label htmlFor='password'>Password: </label>
                     <input
                         type='password'
                         id='password'
                         value={values.password}
                         onChange={_handleChange}
-                        unique
+                        required
                     />
-            </div>
-            <input type='submit' value='Login to BookStop' />
+            </fieldset>
+            <input type='submit' value='Login to BookStop' className="btn btn-danger"/>
+            {/* FormStatus Component*/}
+            <Spinner props={formStatus} />            
         </form>
+
     )
 };
 
 export default LoginForm;
+
+
+
 
