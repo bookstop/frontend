@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../App';
 import { Link } from 'react-router-dom';
 
-const ReadBook = (props) => {
+const WishBook = (props) => {
+    const userContext = useContext(UserContext);
     const [currentBook, setCurrentBook] = useState(null);
-    const API_ENDPOINT = `http://localhost:4000/read-books/book/${props.match.params.bookId}`;
+    const API_ENDPOINT = `http://localhost:4000/wish-lists/book/${props.match.params.bookId}`;
+    // console.log(props.match.params.bookId);
 
     const getBook = async () => {
         try {
@@ -17,7 +20,7 @@ const ReadBook = (props) => {
     }
 
     const _handleDelete = async (e) => {
-        const API_ENDPOINT = `http://localhost:4000/read-books/${props.match.params.bookId}`;
+        const API_ENDPOINT = `http://localhost:4000/wish-lists/${props.match.params.bookId}`;
         if (window.confirm('Are you sure you want to delete?')) {
             try {
                 const deletedBook = await fetch(API_ENDPOINT, { method: 'DELETE'});
@@ -43,10 +46,10 @@ const ReadBook = (props) => {
         <div>
             <h1>{currentBook.title}</h1>
             <h2>{currentBook.author}</h2>
-            <Link className='btn' to={`/read-books/edit/${props.match.params.bookId}`}>Edit</Link>
+            <Link className='btn' to={`/wish-book/edit/${props.match.params.bookId}`}>Edit</Link>
             <button className='btn' onClick={_handleDelete}>Delete</button>
         </div>
     )
 };
 
-export default ReadBook;
+export default WishBook;

@@ -8,6 +8,7 @@ import Navbar from './components/NavBar';
 import Home from './components/Home';
 import EditForm from './components/EditForm';
 import ReadBook from './components/ReadBook/ReadBook';
+import WishBook from './components/WishBook/WishBook';
 
 export const UserContext = createContext(); 
 
@@ -59,6 +60,10 @@ function App() {
             <Route
               path='/read-books/:bookId'
               component={ReadBook}
+            />
+            <Route
+              path='/wish-book/:bookId'
+              component={WishBook}
             />
           </UserContext.Provider>
         </Switch>

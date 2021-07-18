@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 
 const ReadBooks = () => {
     const userContext = useContext(UserContext);
-    // console.log('user context is:', userContext)
-    // console.log(UserContext);
       return (
           <div>
             <CreateReadForm />
