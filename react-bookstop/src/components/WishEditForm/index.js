@@ -3,11 +3,11 @@ import { UserContext } from "../../App";
 import { useHistory } from "react-router-dom";
 
 
-const WishEditForm = ({ currentBook }) => {
-    console.log(currentBook);
-    const API_ENDPOINT = `http://localhost:4000/wish-lists/${currentBook._id}`;
+const WishEditForm = ({ wishListBook }) => {
+    console.log(wishListBook);
+    const API_ENDPOINT = `http://localhost:4000/wish-lists/${wishListBook._id}`;
 
-    const [values, setValues] = useState(currentBook);
+    const [values, setValues] = useState(wishListBook);
     
     const userContext = useContext(UserContext);
   
@@ -48,7 +48,7 @@ const WishEditForm = ({ currentBook }) => {
             })
             if (response.status === 201) {
                 userContext.getUser();
-                history.push(`/wish-lists/${currentBook._id}`);
+                history.push(`/wish-lists/${wishListBook._id}`);
                 setValues(values);
                 console.log('changing book')
             } else {

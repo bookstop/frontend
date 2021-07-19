@@ -26,6 +26,7 @@ export const UserAuthDispatchContext = React.createContext();
 
 function App() {
   const [currentBook, setCurrentBook] = useState(null);
+  const [wishListBook, setWishListBook] = useState(null);
   const [user, setUser] = useState(false);
   let location = useLocation();
   
@@ -165,7 +166,9 @@ function App() {
               user, 
               getUser,
               currentBook,
-              setCurrentBook
+              setCurrentBook,
+              wishListBook,
+              setWishListBook
         }}>
 
       <Navbar value={userAuth._id}/>
@@ -180,7 +183,7 @@ function App() {
             />
             <Route
             path={`/wish-lists/edit/:bookId`} 
-            render={() => currentBook ? <WishEditForm currentBook={currentBook}  /> : 'No book found' }
+            render={() => wishListBook ? <WishEditForm wishListBook={wishListBook}  /> : 'No book found' }
             />
             <Route
               path='/read-books/:bookId'
