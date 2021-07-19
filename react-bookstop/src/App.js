@@ -209,7 +209,7 @@ function App() {
             />  
 
         </Switch>
-        <SearchForm/>
+       
         
       </main>
 
