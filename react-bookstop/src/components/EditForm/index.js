@@ -35,6 +35,24 @@ const EditForm = ({ currentBook }) => {
         });
     };
 
+    const API_ENDPOINT = `http://localhost:4000/read-books/${match.params.bookId}`;
+
+    const getBook = async () => {
+        try {
+            const book = await fetch(API_ENDPOINT);
+            const data = await book.json();
+            setValues({ title: data.title, author: data.title });
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
+    useEffect(() => {
+        if ( (match.params.bookId!==undefined) && (match.params.bookId!=='') ) {
+            getBook();
+        }
+    }, []);
+
     const _updateBook = async (e) => {
         e.preventDefault();
         console.log('values:' , values);
