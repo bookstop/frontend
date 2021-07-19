@@ -1,5 +1,7 @@
 import { useContext, useState, useEffect, useRef } from 'react';
 import { useLocation } from "react-router-dom";
+import { UserContext } from '../../App';
+import { UserAuthStatusContext, UserAuthDispatchContext } from '../../App';
 import axios from 'axios'
 
 export default function SearchForm(){
@@ -7,7 +9,9 @@ export default function SearchForm(){
   const [result,setResult]= useState([]);
   const [apiKey, setApiKey]= useState('AIzaSyAFH6VcFGFwnoVaO-ER32twGdgCa86v8Dw');
 
-
+  const userContext = useContext(UserContext);
+  const userAuth = useContext(UserAuthStatusContext);  
+ 
     // The following code is used to scroll this component into view when the correct window location is loaded
     const location = useLocation();
     const compRef = useRef(null);
@@ -18,7 +22,7 @@ export default function SearchForm(){
         // eslint-disable-next-line
     }, [location.pathname]);
 
-    
+
    function handleChange(event){
        event.preventDefault()
         const book= event.target.value;
@@ -29,7 +33,7 @@ export default function SearchForm(){
      event.preventDefault();
      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book}&key=${apiKey}&maxResults=30`)
      .then(data =>{
-         console.log(data.data.items);
+         /* console.log(data.data.items); */
          setResult(data.data.items)
      })
    }
