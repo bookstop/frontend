@@ -25,14 +25,19 @@ const ReadBooks = () => {
           <div> 
 
             <CreateReadForm />
-                {!userContext.user ? <h2>Not logged in</h2> : 
+                {!userContext.user ? <h2 className='titles-author'>Not logged in</h2> : 
                     userContext.user.readBook.map((book) => {
+                        
                         return (
                             <div key={book._id} className="book-list">
+                                
+                                <p className=' readbook-heading'>Title:</p>
                                 <Link to={`/read-books/${book._id}`}>
-                                    <h2>{book.title}</h2>
+                                    
+                                    <h2 className='titles-author'>{book.title}</h2>
                                 </Link>
-                                    <h3>{book.author}</h3>
+                                <p className=' readbook-heading'>Author:</p>
+                                    <h2 className='titles-author'>{book.author}</h2>
                             </div>
                         )
                     })

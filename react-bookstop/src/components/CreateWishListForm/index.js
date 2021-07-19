@@ -54,7 +54,7 @@ const CreateWishListForm = () => {
          <p className='heading-p'>Add your Fav Books in your Wish List</p>
      <div className='container py-5'>
          <div className='row'>
-         <div className='listforms col-lg-6 col-xm-12'>
+         <div className='listforms'>
      <form onSubmit={_createNewWishBook}>
          
          <div className='txt_field'>
@@ -81,10 +81,6 @@ const CreateWishListForm = () => {
 
          <input className='btn-read btn btn-danger btn-lg ' type='submit' value='Add Book' />
      </form>
-     </div>
-     <div className='read-list-data col-lg-6 col-xm-12'>
-         <h3>Title & Author</h3>
-         <p>All the reviews should go here</p>
      </div>
      </div>
      </div>

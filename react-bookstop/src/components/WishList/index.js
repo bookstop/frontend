@@ -19,17 +19,24 @@ const WishList = () => {
 
       return (
           <>
-          <div ref={compRef} className="header-offset-div"></div> {/* Define a node reference to this component */}
-          <div >  
+          <div ref={compRef} className=" header-offset-div"></div> {/* Define a node reference to this component */}
+          <div className='graywishlist' >  
             <CreateWishListForm />
-                {!userContext.user ? <h2>Not logged in</h2> : 
+                {!userContext.user ? <h2 className='titles-author'>Not logged in</h2> : 
                     userContext.user.wishList.map((book) => {
                         return (
-                            <div key={book._id} className="book-list">
-                                <Link to={`/wish-book/${book._id}`}>
+                            <div key={book._id} className="book-list ">
+                                {/* <Link to={`/wish-book/${book._id}`}>
                                     <h2>{book.title}</h2>
                                 </Link>
-                                <h3>{book.author}</h3>
+                                <h3>{book.author}</h3> */}
+                                <p className=' readbook-heading'>Title:</p>
+                                <Link to={`/wish-books/${book._id}`}>
+                                    
+                                    <h2 className='titles-author'>{book.title}</h2>
+                                </Link>
+                                <p className=' readbook-heading'>Author:</p>
+                                    <h2 className='titles-author'>{book.author}</h2>
                             </div>
                         )
                     })

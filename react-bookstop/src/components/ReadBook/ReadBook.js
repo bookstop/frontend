@@ -40,7 +40,7 @@ const ReadBook = (props) => {
     if (!currentBook) return <h1>Finding your book on the shelf!</h1>
 
     return (
-        <div>
+        <div className='read-list-data col-lg-6 col-xm-12'>
             <h1>{currentBook.title}</h1>
             <h2>{currentBook.author}</h2>
             <Link className='btn' to={`/read-books/edit/${props.match.params.bookId}`}>Edit</Link>
