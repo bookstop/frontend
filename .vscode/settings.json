@@ -1,0 +1,22 @@
+{
+<<<<<<< HEAD
+=======
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#12350d",
+        "titleBar.activeBackground": "#040c03",
+        "titleBar.activeForeground": "#e7e7e7",
+        "activityBar.activeBackground": "#12350d",
+        "activityBar.activeBorder": "#4c5dd3",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#4c5dd3",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "statusBar.background": "#040c03",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#12350d",
+        "titleBar.inactiveBackground": "#040c0399",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#040c03"
+>>>>>>> c348be7 (Complete Scroll Link Functions)
+}

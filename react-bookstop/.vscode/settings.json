@@ -1,0 +1,23 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#0a360f",
+        "titleBar.activeBackground": "#020b03",
+        "titleBar.activeForeground": "#e7e7e7",
+        "activityBar.activeBackground": "#0a360f",
+        "activityBar.activeBorder": "#5443dc",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#5443dc",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "statusBar.background": "#020b03",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#0a360f",
+        "titleBar.inactiveBackground": "#020b0399",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "cSpell.words": [
+        "books",
+        "read"
+    ],
+    "peacock.color": "#020b03"
+}
