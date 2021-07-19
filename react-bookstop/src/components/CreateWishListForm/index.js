@@ -26,7 +26,7 @@ const CreateWishListForm = () => {
     const _createNewWishBook = async (e) => {
         e.preventDefault();
         try {
-            const API_ENDPOINT = `http://localhost:4000/wish-lists`;
+            const API_ENDPOINT = `https://bookstop-api.herokuapp.com/wish-lists`;
             const response = await fetch(API_ENDPOINT, {
                 method: 'POST',
                 body: JSON.stringify({

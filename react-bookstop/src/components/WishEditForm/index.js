@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 const WishEditForm = ({ wishListBook }) => {
     console.log(wishListBook);
-    const API_ENDPOINT = `http://localhost:4000/wish-lists/${wishListBook._id}`;
+    const API_ENDPOINT = `https://bookstop-api.herokuapp.com/wish-lists/${wishListBook._id}`;
 
     const [values, setValues] = useState(wishListBook);
     

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 
 const EditForm = ({ currentBook }) => {
-    const API_ENDPOINT = `http://localhost:4000/read-books/${currentBook._id}`;
+    const API_ENDPOINT = `https://bookstop-api.herokuapp.com/read-books/${currentBook._id}`;
 
     const [values, setValues] = useState(currentBook);
     

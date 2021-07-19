@@ -31,7 +31,7 @@ const RegisterForm = () => {
     const _createNewUser = async e => {
         setFormStatus({showStatus:true, showSpinner:true, message: ""});
         e.preventDefault()
-        const ENDPOINT = 'http://localhost:4000/users'
+        const ENDPOINT = 'https://bookstop-api.herokuapp.com/users'
         //console.log(values)
         try {
             const newUserResponse = await fetch(ENDPOINT, {

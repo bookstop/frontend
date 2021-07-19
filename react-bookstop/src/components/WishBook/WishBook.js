@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../App';
 
 const WishBook = (props) => {
-    const API_ENDPOINT = `http://localhost:4000/wish-lists/book/${props.match.params.bookId}`;
+    const API_ENDPOINT = `https://bookstop-api.herokuapp.com/wish-lists/book/${props.match.params.bookId}`;
     const userContext = useContext(UserContext);
     const history = useHistory();
 
@@ -18,7 +18,7 @@ const WishBook = (props) => {
     }
 
     const _handleDelete = async (e) => {
-        const API_ENDPOINT = `http://localhost:4000/wish-lists/${props.match.params.bookId}`;
+        const API_ENDPOINT = `https://bookstop-api.herokuapp.com/wish-lists/${props.match.params.bookId}`;
         if (window.confirm('Are you sure you want to delete?')) {
             try {
                 const deletedBook = await fetch(API_ENDPOINT, { method: 'DELETE'});

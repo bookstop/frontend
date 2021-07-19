@@ -26,7 +26,7 @@ const CreateReadForm = () => {
     const _createNewReadBook = async (e) => {
         e.preventDefault();
         try {
-            const API_ENDPOINT = 'http://localhost:4000/read-books';
+            const API_ENDPOINT = 'https://bookstop-api.herokuapp.com/read-books';
             const response = await fetch(API_ENDPOINT, {
                 method: 'POST',
                 body: JSON.stringify({
