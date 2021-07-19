@@ -1,10 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../../App";
 import { UserAuthStatusContext, UserAuthDispatchContext } from '../../App';
 import { Spinner } from '../Spinner';
 
 const LoginForm = (props) => {
 
+    const userContext = useContext(UserContext);
     const userAuth = useContext(UserAuthStatusContext);
     const userDispatch = useContext(UserAuthDispatchContext);
     let history = useHistory();
@@ -39,6 +41,7 @@ const LoginForm = (props) => {
                 userDispatch({"type":"Login", "login": data} );
                 setFormStatus({showStatus:true, showSpinner:false, message: "You have successfully logged in."});
                 setLoggedIn(true);
+                userContext.getUser();
             }
             else {
                 setFormStatus({showStatus: true, showSpinner:false, message: "Log in failed.  Check your credentials and try again."});

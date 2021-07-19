@@ -1,8 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
+import { UserContext } from "../../App";
 import { UserAuthStatusContext, UserAuthDispatchContext } from '../../App';
 
 const Logout = (props) => {
 
+    const userContext = useContext(UserContext);
     const userAuth = useContext(UserAuthStatusContext);
     const userDispatch = useContext(UserAuthDispatchContext);
  
@@ -23,7 +25,9 @@ const Logout = (props) => {
                 // localStorage.setItem('BookStopUser', data._id );
                 localStorage.removeItem('BookStopUser');
                 // localStorage.getItem('BookStopUser');
+                
                 userDispatch({"type":"Login", "login": data} );
+                userContext.setUser(null);
             }
         } catch (err) {
             console.log(err)
