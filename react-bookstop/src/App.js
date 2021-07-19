@@ -23,8 +23,6 @@ export const UserContext = React.createContext();
 export const UserAuthStatusContext = React.createContext();
 export const UserAuthDispatchContext = React.createContext(); 
 
-export const UserContext = createContext(); 
-
 function App() {
   
   const [user, setUser] = useState(false);

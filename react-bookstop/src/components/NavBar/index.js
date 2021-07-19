@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Link } from "react-router-dom";
-import {Linksscroll} from 'react-scroll';
 import Logo from "../../Assets/logo_v2.png"
 import { UserAuthStatusContext } from '../../App';
 
