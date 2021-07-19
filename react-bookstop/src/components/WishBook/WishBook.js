@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { UserContext } from '../../App';
 
 const WishBook = (props) => {
     const [currentBook, setCurrentBook] = useState(null);
     const API_ENDPOINT = `http://localhost:4000/wish-lists/book/${props.match.params.bookId}`;
-    // console.log(props.match.params.bookId);
+    const userContext = useContext(UserContext);
+    const history = useHistory();
 
     const getBook = async () => {
         try {
@@ -23,7 +25,8 @@ const WishBook = (props) => {
             try {
                 const deletedBook = await fetch(API_ENDPOINT, { method: 'DELETE'});
                 if(deletedBook.status === 204) {
-                    console.log('deleted book')
+                    userContext.getUser();
+                    history.push('/home');
                 } else {
                     alert('Something went wrong. Please try again!');
                 } 

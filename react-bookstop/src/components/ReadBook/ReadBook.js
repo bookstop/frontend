@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link, useHistory, Route } from 'react-router-dom';
+import { UserContext } from '../../App';
+import EditForm from '../EditForm';
 
 const ReadBook = (props) => {
-    const [currentBook, setCurrentBook] = useState(null);
+    
     const API_ENDPOINT = `http://localhost:4000/read-books/book/${props.match.params.bookId}`;
+    const userContext = useContext(UserContext);
+    const history = useHistory();
 
     const getBook = async () => {
         try {
             const response = await fetch(API_ENDPOINT);
             const data = await response.json();
             console.log(data);
-            setCurrentBook(data);
+            userContext.setCurrentBook(data);
         } catch (err) {
             console.log(err);
         }
@@ -22,9 +26,10 @@ const ReadBook = (props) => {
             try {
                 const deletedBook = await fetch(API_ENDPOINT, { method: 'DELETE'});
                 if(deletedBook.status === 204) {
-                    console.log('deleted book')
+                    userContext.getUser();
+                    history.push('/home');
                 } else {
-                    alert('Something went wrong. Please try again!');
+                    alert('Something went wrong. Please try again!');   
                 } 
             } catch (err) {
                 console.log(err);
@@ -37,14 +42,14 @@ const ReadBook = (props) => {
         getBook();
     }, []);
     
-    if (!currentBook) return <h1>Finding your book on the shelf!</h1>
+    if (!userContext.currentBook) return <h1>Finding your book on the shelf!</h1>
 
     return (
         <div>
-            <h1>{currentBook.title}</h1>
-            <h2>{currentBook.author}</h2>
+            <h1>{userContext.currentBook.title}</h1>
+            <h2>{userContext.currentBook.author}</h2>
             <Link className='btn' to={`/read-books/edit/${props.match.params.bookId}`}>Edit</Link>
-            <button className='btn' onClick={_handleDelete}>Delete</button>
+            <button className='btn' onClick={_handleDelete}>Delete</button>            
         </div>
     )
 };
