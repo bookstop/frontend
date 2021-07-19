@@ -1,6 +1,7 @@
 import CreateWishListForm from "../CreateWishListForm";
+
 import { useContext, useEffect, useRef } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { UserContext } from "../../App";
 
 const WishList = () => {
@@ -24,8 +25,10 @@ const WishList = () => {
                 {!userContext.user ? <h2>Not logged in</h2> : 
                     userContext.user.wishList.map((book) => {
                         return (
-                            <div key={book._id}>
-                                <h2>{book.title}</h2>
+                            <div key={book._id} className="book-list">
+                                <Link to={`/wish-book/${book._id}`}>
+                                    <h2>{book.title}</h2>
+                                </Link>
                                 <h3>{book.author}</h3>
                             </div>
                         )
@@ -33,8 +36,8 @@ const WishList = () => {
 
                 }    
             </div>
-            </>
-      )
+            </> 
+            )
 }
 
 export default WishList;

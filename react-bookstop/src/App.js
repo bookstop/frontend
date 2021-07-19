@@ -1,9 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';   //minimizing bootstrap use 
 import './App.css';
+
 import { useLocation } from "react-router-dom";
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import { useState, useEffect, useContext, useReducer } from 'react';
+import { useState, useEffect, useContext, createContext, useReducer } from 'react';
 
 import Navbar from './components/NavBar';
 import SearchForm from './components/SearchForm';
@@ -13,13 +14,16 @@ import Home from './components/Home';
 import LoginForm from './components/LoginForm';
 import Logout from './components/Logout';
 import Header from './components/Header'
-
+import EditForm from './components/EditForm';
+import ReadBook from './components/ReadBook/ReadBook';
+import WishBook from './components/WishBook/WishBook';
 
 // Declare three global useContext contexts to pass state and dispatch context to lower components
 export const UserContext = React.createContext(); 
 export const UserAuthStatusContext = React.createContext();
-export const UserAuthDispatchContext = React.createContext();
+export const UserAuthDispatchContext = React.createContext(); 
 
+export const UserContext = createContext(); 
 
 function App() {
   
@@ -78,11 +82,12 @@ function App() {
     // information and see if they are a valid user with a valid active session.  Even if they 
     // are a recognized "active" user, we won't give them access unless they have signed in 
     // recently and browsed the site, which is tracked by the lastAccess value.
+
     try {
       const API_ENDPOINT = `http://localhost:4000/users/${userID}`;
       const response = await fetch (API_ENDPOINT);
       const data = await response.json();
- 
+      
       setUser(data);
 
       const userAuthUpdate = { _id: data._id, 
@@ -168,6 +173,22 @@ function App() {
       
       <main>
         <Switch>
+
+            <Route  
+              path='/read-books/edit/:bookId'
+              render={(routerProps) => (
+                <EditForm match={routerProps.match} />
+                )}
+            />
+            <Route
+              path='/read-books/:bookId'
+              component={ReadBook}
+            />
+            <Route
+              path='/wish-book/:bookId'
+              component={WishBook}
+            />
+                
             <Route
               path='/register'
               component={RegisterForm}
@@ -188,6 +209,7 @@ function App() {
               path='/'
               component={Home}
             />  
+
         </Switch>
         <SearchForm/>
         

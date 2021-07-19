@@ -1,6 +1,6 @@
 import CreateReadForm from "../CreateReadForm";
 import { useContext, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { UserContext } from '../../App';
 
 const ReadBooks = () => {
@@ -23,19 +23,23 @@ const ReadBooks = () => {
          <>
         <div ref={compRef} className="header-offset-div"></div> {/* Define a node reference to this component */}
           <div> 
+
             <CreateReadForm />
                 {!userContext.user ? <h2>Not logged in</h2> : 
                     userContext.user.readBook.map((book) => {
                         return (
-                            <div key={book._id}>
-                                <h2>{book.title}</h2>
-                                <h3>{book.author}</h3>
+                            <div key={book._id} className="book-list">
+                                <Link to={`/read-books/${book._id}`}>
+                                    <h2>{book.title}</h2>
+                                </Link>
+                                    <h3>{book.author}</h3>
                             </div>
                         )
                     })
 
                 }    
             </div>
+
         </>
       )
 }

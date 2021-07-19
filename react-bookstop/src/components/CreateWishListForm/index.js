@@ -48,28 +48,7 @@ const CreateWishListForm = () => {
     };
 
     return (
-        // <form onSubmit={_createNewWishBook}>
-        //     <div>
-        //         <label htmlFor='title'>Title</label>
-        //             <input
-        //                 type='text'
-        //                 id='title'
-        //                 value={values.title}
-        //                 onChange={_handleChange}
-        //                 required
-        //             />  
-        //     </div>
-        //     <div>
-        //         <label htmlFor='author'>Author</label>
-        //             <input
-        //                 type='text'
-        //                 id='author'
-        //                 value={values.author}
-        //                 onChange={_handleChange}
-        //             />
-        //     </div>
-        //     <input type='submit' value='Add Book to Wish List' />
-        // </form>
+
          <div className='read-list wish-list'>
          <h1 className='heading-list wish-list-heading'>Wish List</h1>
          <p className='heading-p'>Add your Fav Books in your Wish List</p>
@@ -88,6 +67,7 @@ const CreateWishListForm = () => {
                         required
                     />   
          </div>
+
          <div className='txt_field'>
              <label className='heading-p' htmlFor='author'>Author</label>
                  <input
@@ -98,6 +78,7 @@ const CreateWishListForm = () => {
                      required
                  />
          </div>
+
          <input className='btn-read btn btn-danger btn-lg ' type='submit' value='Add Book' />
      </form>
      </div>
