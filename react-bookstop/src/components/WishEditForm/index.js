@@ -3,10 +3,11 @@ import { UserContext } from "../../App";
 import { useHistory } from "react-router-dom";
 
 
-const EditForm = ({ currentBook }) => {
-    const API_ENDPOINT = `http://localhost:4000/read-books/${currentBook._id}`;
+const WishEditForm = ({ wishListBook }) => {
+    console.log(wishListBook);
+    const API_ENDPOINT = `http://localhost:4000/wish-lists/${wishListBook._id}`;
 
-    const [values, setValues] = useState(currentBook);
+    const [values, setValues] = useState(wishListBook);
     
     const userContext = useContext(UserContext);
   
@@ -35,15 +36,11 @@ const EditForm = ({ currentBook }) => {
             if (values.author === '' && values.title === ''){
                 return;
             };
-            if (values.review !== '') {
-                newValues.review = values.review;
-            }
             const response = await fetch(API_ENDPOINT, {
                 method: 'PUT',
                 body: JSON.stringify({
                     title: values.title,
                     author: values.author,
-                    review: values.review,
                 }),
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,8 +48,9 @@ const EditForm = ({ currentBook }) => {
             })
             if (response.status === 201) {
                 userContext.getUser();
-                history.push(`/read-books/${currentBook._id}`);
+                history.push(`/wish-lists/${wishListBook._id}`);
                 setValues(values);
+                console.log('changing book')
             } else {
                 alert('Something went wrong. Please try again');
             }
@@ -79,17 +77,11 @@ const EditForm = ({ currentBook }) => {
                     onChange={_handleChange}
                 />
                 <label htmlFor='review'>Review</label>
-                <input
-                    type='text'
-                    id='review'
-                    value={values.review}
-                    onChange={_handleChange}
-                />
                 <input type='submit' value='Update book' />
             </form>
         </div>
     )
 };
 
-export default EditForm;
+export default WishEditForm;
 

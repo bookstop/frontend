@@ -15,6 +15,7 @@ import LoginForm from './components/LoginForm';
 import Logout from './components/Logout';
 import Header from './components/Header'
 import EditForm from './components/EditForm';
+import WishEditForm from './components/WishEditForm';
 import ReadBook from './components/ReadBook/ReadBook';
 import WishBook from './components/WishBook/WishBook';
 
@@ -24,7 +25,8 @@ export const UserAuthStatusContext = React.createContext();
 export const UserAuthDispatchContext = React.createContext(); 
 
 function App() {
-  
+  const [currentBook, setCurrentBook] = useState(null);
+  const [wishListBook, setWishListBook] = useState(null);
   const [user, setUser] = useState(false);
   let location = useLocation();
   
@@ -162,7 +164,11 @@ function App() {
       <UserAuthDispatchContext.Provider value={dispatch}>   
         <UserContext.Provider value={{
               user, 
-              getUser
+              getUser,
+              currentBook,
+              setCurrentBook,
+              wishListBook,
+              setWishListBook
         }}>
 
       <Navbar value={userAuth._id}/>
@@ -171,12 +177,13 @@ function App() {
       
       <main>
         <Switch>
-
-            <Route  
-              path='/read-books/edit/:bookId'
-              render={(routerProps) => (
-                <EditForm match={routerProps.match} />
-                )}
+            <Route
+            path={`/read-books/edit/:bookId`} 
+            render={() => currentBook ? <EditForm currentBook={currentBook}  /> : 'No book found' }
+            />
+            <Route
+            path={`/wish-lists/edit/:bookId`} 
+            render={() => wishListBook ? <WishEditForm wishListBook={wishListBook}  /> : 'No book found' }
             />
             <Route
               path='/read-books/:bookId'
@@ -209,7 +216,7 @@ function App() {
             />  
 
         </Switch>
-        <SearchForm/>
+       
         
       </main>
 
