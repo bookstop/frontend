@@ -15,6 +15,7 @@ import LoginForm from './components/LoginForm';
 import Logout from './components/Logout';
 import Header from './components/Header'
 import EditForm from './components/EditForm';
+import WishEditForm from './components/WishEditForm';
 import ReadBook from './components/ReadBook/ReadBook';
 import WishBook from './components/WishBook/WishBook';
 
@@ -175,7 +176,11 @@ function App() {
         <Switch>
             <Route
             path={`/read-books/edit/:bookId`} 
-            render={() => currentBook ? <EditForm currentBook={currentBook}   /> : 'No book found' }
+            render={() => currentBook ? <EditForm currentBook={currentBook}  /> : 'No book found' }
+            />
+            <Route
+            path={`/wish-lists/edit/:bookId`} 
+            render={() => currentBook ? <WishEditForm currentBook={currentBook}  /> : 'No book found' }
             />
             <Route
               path='/read-books/:bookId'
