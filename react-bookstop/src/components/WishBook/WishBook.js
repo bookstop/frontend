@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../App';
 
 const WishBook = (props) => {
-    const [currentBook, setCurrentBook] = useState(null);
     const API_ENDPOINT = `http://localhost:4000/wish-lists/book/${props.match.params.bookId}`;
     const userContext = useContext(UserContext);
     const history = useHistory();
@@ -12,8 +11,7 @@ const WishBook = (props) => {
         try {
             const response = await fetch(API_ENDPOINT);
             const data = await response.json();
-            // console.log(data);
-            setCurrentBook(data);
+            userContext.setWishListBook(data);
         } catch (err) {
             console.log(err);
         }
@@ -41,12 +39,12 @@ const WishBook = (props) => {
         getBook();
     }, []);
     
-    if (!currentBook) return <h1>Finding your book on the shelf!</h1>
+    if (!userContext.wishListBook) return <h1>Finding your book on the shelf!</h1>
 
     return (
         <div>
-            <h1>{currentBook.title}</h1>
-            <h2>{currentBook.author}</h2>
+            <h1>{userContext.wishListBook.title}</h1>
+            <h2>{userContext.wishListBook.author}</h2>
             <Link className='btn' to={`/wish-lists/edit/${props.match.params.bookId}`}>Edit</Link>
             <button className='btn' onClick={_handleDelete}>Delete</button>
         </div>
