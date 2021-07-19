@@ -47,7 +47,7 @@ const WishBook = (props) => {
         <div>
             <h1>{currentBook.title}</h1>
             <h2>{currentBook.author}</h2>
-            <Link className='btn' to={`/wish-book/edit/${props.match.params.bookId}`}>Edit</Link>
+            <Link className='btn' to={`/wish-lists/edit/${props.match.params.bookId}`}>Edit</Link>
             <button className='btn' onClick={_handleDelete}>Delete</button>
         </div>
     )
