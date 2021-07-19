@@ -64,7 +64,7 @@ nav ul li{
 
 .header-wrapper {
   position: relative;
-  background: url(https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1453&q=80) no-repeat;
+  background: url(./images/home_background_photo_70.png) no-repeat;
   text-align: center;
   background-size: cover;
   background-position: center;
@@ -111,14 +111,25 @@ nav ul li{
   padding-right: 72px;
   padding-left: 72px; */
   margin-bottom: 20px;
+  text-shadow: 3px 3px 4px #000000;
 }
 .welcome-harry{
   font-weight: 600;
-  font-size: 250%;
+  font-size: 280%;
   color: #dc3545 !important;
   text-align: left;
-  
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 3px #000000;
 }
+
+div.header-button-box {
+  display: flex;
+}
+
+div.header-button-box div {
+  margin: 10px;
+}
+
 
 /* //////// READ LIST /////////////// */
 
@@ -135,6 +146,7 @@ nav ul li{
    font-size: 320%;
    font-weight: 550;
 }
+
 .wish-list{
   background-color: rgb(233, 220, 220);
 }
@@ -142,6 +154,12 @@ nav ul li{
   margin-top: 20px !important;
   padding-top: 30px;
 
+}
+
+/* //////// This is a spacer that allows link scrolling to work correctly. It offsets the fixed navigation header. ////// */
+div.header-offset-div {
+  margin-top: -80px;
+  height: 80px;
 }
 
 .heading-p{

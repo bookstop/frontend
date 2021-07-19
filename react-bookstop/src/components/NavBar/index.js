@@ -24,13 +24,13 @@ export default function Nav(){
         <Link className="nav-link borderlight Link" to="/home">Home <span className="sr-only"></span></Link>
         </li> */}
         <li className="nav-item">
-        <Link className="nav-link borderlight Link" to="/read">Reads</Link>
+        <Link className="nav-link borderlight Link" to="/readbooks">Read Books</Link>
         </li>
         <li className="nav-item">
         <Link className="nav-link borderlight Link" to="/wishlist">Wish List</Link>
         </li>
         <li className="nav-item">
-        <Link className="nav-link borderlight Link" to="/searchbook">Search Book</Link>
+        <Link className="nav-link borderlight Link" to="/searchbooks">Search Books</Link>
         </li>
 
         { ((!userAuth) || (userAuth.status!=='active') || ((Date.now()-userAuth.lastAccess)>900) ) ? (

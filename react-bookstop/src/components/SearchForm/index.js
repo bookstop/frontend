@@ -1,4 +1,5 @@
-import {useState, useEffect} from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
+import { useLocation } from "react-router-dom";
 import axios from 'axios'
 
 export default function SearchForm(){
@@ -7,11 +8,17 @@ export default function SearchForm(){
   const [apiKey, setApiKey]= useState('AIzaSyAFH6VcFGFwnoVaO-ER32twGdgCa86v8Dw');
 
 
+    // The following code is used to scroll this component into view when the correct window location is loaded
+    const location = useLocation();
+    const compRef = useRef(null);
+    useEffect( () => {
+        if (location && location.pathname==="/searchbooks") {
+            compRef.current.scrollIntoView();
+        }
+        // eslint-disable-next-line
+    }, [location.pathname]);
 
-
-
-
-  
+    
    function handleChange(event){
        event.preventDefault()
         const book= event.target.value;
@@ -32,7 +39,10 @@ export default function SearchForm(){
 },[]);
 
     return(
-        <div className=''>
+         <>
+          <div ref={compRef} className="header-offset-div"></div> {/* Define a node reference to this component */}
+
+          <div className=''> 
             <div className='search-book'>
             <h1 className='heading-list wish-list-heading'>Search Book</h1>
             <p className='heading-p '>Search For Your FAV Book</p>
@@ -73,5 +83,6 @@ export default function SearchForm(){
             })}
             </section>
         </div>
+        </>
     )
 }
