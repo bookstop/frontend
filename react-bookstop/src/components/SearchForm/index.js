@@ -4,7 +4,7 @@ import { UserContext } from '../../App';
 import { UserAuthStatusContext, UserAuthDispatchContext } from '../../App';
 import axios from 'axios'
 
-export default function SearchForm(){
+export default function SearchForm(props){
   const [book, setBook] = useState('');
   const [result,setResult]= useState([]);
   const [apiKey, setApiKey]= useState('AIzaSyAFH6VcFGFwnoVaO-ER32twGdgCa86v8Dw');
@@ -15,6 +15,8 @@ export default function SearchForm(){
     // The following code is used to scroll this component into view when the correct window location is loaded
     const location = useLocation();
     const compRef = useRef(null);
+    const searchResultsRef = useRef(null);
+
     useEffect( () => {
         if (location && location.pathname==="/searchbooks") {
             compRef.current.scrollIntoView();
@@ -31,16 +33,26 @@ export default function SearchForm(){
 
    function handleSubmit(event){
      event.preventDefault();
+     try {
      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book}&key=${apiKey}&maxResults=30`)
      .then(data =>{
          /* console.log(data.data.items); */
-         setResult(data.data.items)
+         setResult(data.data.items);
+         props.setHaveNewBooks(true);
      })
+    }
+    catch(error) {
+        console.error(error);
+    }
+
    }
 
    useEffect(()=>{
-//    handleChange();
-},[]);
+    if (props.haveNewBooks) {
+        searchResultsRef.current.scrollIntoView();
+        props.setHaveNewBooks(false);
+    }
+   },[props.haveNewBooks]);
 
     return(
          <>
@@ -57,13 +69,15 @@ export default function SearchForm(){
                 <button type='submit' className='btn btn-danger btn-lg'>Search Books</button>
             </form>
             </div>
-            <section className='box-area'>
-            {result.map((booked)=>{
+
+            <div ref={searchResultsRef} className="header-offset-div"></div> {/* Define a node reference to this component */}
+
+            <section className='box-area' >
+            {result.map((booked, index)=>{
                 return(
-                   
-                 <article  className='single-box' key={booked.volumeInfo.id}>
-                     <div className='img-area'>
-                         <img className='' src={booked.volumeInfo.imageLinks.thumbnail} alt={booked.volumeInfo.title}/>
+                    <article  className='single-box' key={booked.id} >
+                         <div className='img-area'>
+                         <img className='bookThumb' src={booked.volumeInfo.imageLinks.thumbnail} alt={booked.volumeInfo.title}/>
                      </div>
                      <div>
                          <h3 className='inner-box'>{booked.volumeInfo.title}</h3>

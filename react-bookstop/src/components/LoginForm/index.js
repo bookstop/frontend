@@ -82,6 +82,7 @@ const LoginForm = (props) => {
  
     return (
 
+        <div className="login-form-container">
         <form onSubmit={_handleUserLogin} className="login-form">
             <h3>Registered User Log In</h3>
             <fieldset>
@@ -106,8 +107,10 @@ const LoginForm = (props) => {
             </fieldset>
             <input type='submit' value='Login to BookStop' className="btn btn-danger"/>
             {/* FormStatus Component*/}
-            <Spinner props={formStatus} />            
+            <Spinner props={formStatus} />    
+            <p className="close-window"><a href="/home" className="close-window">CLOSE WINDOW</a></p>        
         </form>
+        </div>
 
     )
 };

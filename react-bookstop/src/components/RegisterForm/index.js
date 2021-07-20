@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import { Spinner } from '../Spinner';
 
 const RegisterForm = () => {
@@ -18,6 +19,9 @@ const RegisterForm = () => {
 
     const [formStatus, setFormStatus] = useState(initialFormSubmitStatus);
     const [values, setValues] = useState(initialFormState)
+    const [registered, setRegistered] = useState(false);
+    let history = useHistory();
+
 
     const _handleChange = e => {
         setValues((prevState) => {
@@ -44,20 +48,34 @@ const RegisterForm = () => {
             if (newUserResponse.status === 201) {
                 setFormStatus({showStatus:true, showSpinner:false, message: "Your BookStop account has been successfully created."});
                 setValues(initialFormState)
+                setRegistered(true);
             }
             else {
-                setFormStatus({showStatus: true, showSpinner:false, message: "Your user account could not be created.  Check your input and try again."});               
+                setFormStatus({showStatus: true, showSpinner:false, message: "Your user account could not be created.  Check your input and try again."}); 
+                setRegistered(false);              
             }
             // console.log(newUserResponse)
         } catch (error) {
-            setFormStatus({showStatus: true, showSpinner:false, message: "The BookStop account registration system encountered an error.  Please try again."});            
+            setFormStatus({showStatus: true, showSpinner:false, message: "The BookStop account registration system encountered an error.  Please try again."});  
+            setRegistered(false);          
             console.error(error)
         }
     }
 
+    // Upon a successful registration, send the user to the /home route after a 3 second delay
+    useEffect(() => {
+        if (registered===true) {
+            setTimeout(() => {
+                history.push('/home');
+            }, 3000);
+        }
+        }, [registered, history]);
+
     return (
         
+        <div className="register-form-container">
         <form onSubmit={_createNewUser} className="registration-form"  >
+            <h3>BookStop Account Registration</h3>
             <fieldset>
                 <label htmlFor="username">Username: </label>
                 <input
@@ -107,8 +125,12 @@ const RegisterForm = () => {
                 <input type="submit" id='create' value="Register for an Account" className="btn btn-danger" />
             </fieldset>
             {/* FormStatus Component*/}
-            <Spinner props={formStatus} />                      
+            <Spinner props={formStatus} /> 
+                
+            <p className="close-window"><a href="/home" className="close-window">CLOSE WINDOW</a></p>        
+                    
         </form>
+        </div>
     
     )
 }
