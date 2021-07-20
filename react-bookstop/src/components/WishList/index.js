@@ -25,10 +25,12 @@ const WishList = () => {
 
       return (
           <>
+
           <div ref={compRef} className=" header-offset-div"></div> {/* Define a node reference to this component */}
           <div className='graywishlist' >  
             <CreateWishListForm />
                 {!userContext.user ? <h2 className='titles-author'>Not logged in</h2> : 
+
                     userContext.user.wishList.map((book) => {
                         return (
                             <div key={book._id} className="book-list ">
