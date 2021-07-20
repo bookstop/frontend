@@ -137,7 +137,7 @@ div.header-button-box div {
   /* text-align: center; */
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 70vh;
 }
 .heading-list{
    text-align: center;
@@ -145,6 +145,44 @@ div.header-button-box div {
    font-family: 'Courier New', Courier, monospace;
    font-size: 320%;
    font-weight: 550;
+}
+
+.listforms{
+  padding-right: 300px;
+  margin-left: 100px;
+  margin-bottom: 20px;
+}
+.book-list{
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+
+
+.readbook-heading{
+  /* padding-right: 70px; */
+  font-size: 140%;
+  /* background-color: red; */
+  text-align: center;
+  margin-top: 0px;
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  font-weight: 550;
+  margin-right: 140px;
+}
+/* .title-author{
+  text-align: center;
+  font-size: 100% !important;
+  background-color: red;
+  font-style: italic;
+  font-weight: 550;
+} */
+.graywishlist{
+  background-color: rgb(233, 220, 220);
+}
+
+.titles-author{
+  text-align: center;
 }
 
 .wish-list{
@@ -174,7 +212,7 @@ div.header-offset-div {
 .txt_field{
   position: relative;
   border-bottom: 2px solid #adadad !important;
-  margin: 30px 0;
+  margin: 40px 0;
 }
 .txt_field input{
   width: 100%;
