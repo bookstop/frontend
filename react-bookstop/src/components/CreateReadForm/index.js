@@ -49,8 +49,8 @@ const CreateReadForm = () => {
 
     return (
         <div className='read-list'>
-            <h1 className='heading-list'>Read List</h1>
-            <p className='heading-p'>Add your Fav Books in your Read List</p>
+            <h1 className='heading-list'>My Bookshelf</h1>
+            <p className='heading-p'>Add the books you've already read to your bookshelf</p>
         <div className='container py-5'>
             <div className='row'>
             <div className='listforms'>

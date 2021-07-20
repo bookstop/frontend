@@ -24,7 +24,7 @@ export const UserAuthStatusContext = React.createContext();
 export const UserAuthDispatchContext = React.createContext(); 
 
 function App() {
-  
+  const [currentBook, setCurrentBook] = useState(null);
   const [user, setUser] = useState(false);
   let location = useLocation();
   
@@ -162,7 +162,9 @@ function App() {
       <UserAuthDispatchContext.Provider value={dispatch}>   
         <UserContext.Provider value={{
               user, 
-              getUser
+              getUser,
+              currentBook,
+              setCurrentBook
         }}>
 
       <Navbar value={userAuth._id}/>
@@ -171,12 +173,9 @@ function App() {
       
       <main>
         <Switch>
-
-            <Route  
-              path='/read-books/edit/:bookId'
-              render={(routerProps) => (
-                <EditForm match={routerProps.match} />
-                )}
+            <Route
+            path={`/read-books/edit/:bookId`} 
+            render={() => currentBook ? <EditForm currentBook={currentBook}   /> : 'No book found' }
             />
             <Route
               path='/read-books/:bookId'

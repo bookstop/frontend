@@ -50,8 +50,8 @@ const CreateWishListForm = () => {
     return (
 
          <div className='read-list wish-list'>
-         <h1 className='heading-list wish-list-heading'>Wish List</h1>
-         <p className='heading-p'>Add your Fav Books in your Wish List</p>
+         <h1 className='heading-list wish-list-heading'>My Wish List</h1>
+         <p className='heading-p'>Keep track of the books you hope to read soon here</p>
      <div className='container py-5'>
          <div className='row'>
          <div className='listforms'>
