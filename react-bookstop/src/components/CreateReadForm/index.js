@@ -53,7 +53,7 @@ const CreateReadForm = () => {
             <p className='heading-p'>Add the books you've already read to your bookshelf</p>
         <div className='container py-5'>
             <div className='row'>
-            <div className='listforms col-lg-6 col-xm-12'>
+            <div className='listforms'>
         <form onSubmit={_createNewReadBook}>
             
             <div className='txt_field'>
@@ -88,10 +88,7 @@ const CreateReadForm = () => {
             <input className='btn-read btn btn-danger btn-lg ' type='submit' value='Add Book' />
         </form>
         </div>
-        <div className='read-list-data col-lg-6 col-xm-12'>
-            <h3>Title & Author</h3>
-            <p>All the reviews should go here</p>
-        </div>
+        
         </div>
         </div>
         </div>
