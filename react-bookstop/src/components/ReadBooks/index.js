@@ -2,14 +2,14 @@ import CreateReadForm from "../CreateReadForm";
 import { useContext, useEffect, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { UserContext } from '../../App';
+import { UserAuthStatusContext, UserAuthDispatchContext } from '../../App';
 
 const ReadBooks = () => {
 
     const userContext = useContext(UserContext);
-    // console.log('user context is:', userContext)
-    // console.log(UserContext);
+    const userAuth = useContext(UserAuthStatusContext);
 
-    // The following code is used to croll this component into view when the correct window location is loaded
+    // The following code is used to scroll this component into view when the correct window location is loaded
     const location = useLocation();
     const compRef = useRef(null);
     useEffect( () => {
@@ -25,7 +25,7 @@ const ReadBooks = () => {
           <div> 
 
             <CreateReadForm />
-                {!userContext.user ? <h2 className='titles-author'>Not logged in</h2> : 
+                {!userContext.user ? <h2 className='titles-author'>Not Logged In</h2> : 
                     userContext.user.readBook.map((book) => {
                         
                         return (

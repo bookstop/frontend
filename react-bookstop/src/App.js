@@ -109,7 +109,7 @@ function App() {
   useEffect(() => {
     getUser();
     // eslint-disable-next-line
-  }, []);
+  }, [userAuth, location]);
 
   // This function simple calls the backend API and updates the user's lastaccess time in seconds since the epoch
   // We do this so we know when the user is inactive, in which case we consider them logged off.
@@ -153,7 +153,7 @@ function App() {
     if ( (userAuth) && (userAuth._id) && (userAuth.status==='active') ) { 
       _userSessionKeepAlive();
     }
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [location] );
 
 
@@ -165,6 +165,7 @@ function App() {
         <UserContext.Provider value={{
               user, 
               getUser,
+              setUser,
               currentBook,
               setCurrentBook,
               wishListBook,
@@ -233,7 +234,7 @@ function App() {
 // This provides some unique debugging opportunities to trace events and refreshes when the Web console log
 // may be clearing on the browser.
 
-function storage_log(logValue) {
+export function storage_log(logValue) {
 
   const previousValue = localStorage.getItem("BookStop.log");
 
