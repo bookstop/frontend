@@ -29,7 +29,7 @@ const WishList = () => {
           <div >  
 
             <CreateWishListForm />
-                {!userContext.user ? <h2>Not logged in Wish List 2</h2> : 
+                {!userContext.user ? <h2>Not Logged In</h2> : 
                     userContext.user.wishList.map((book) => {
                         return (
                             <div key={book._id} className="book-list">
