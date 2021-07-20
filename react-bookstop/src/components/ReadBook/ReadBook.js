@@ -13,7 +13,7 @@ const ReadBook = (props) => {
         try {
             const response = await fetch(API_ENDPOINT);
             const data = await response.json();
-            console.log(data);
+            //console.log(data);
             userContext.setCurrentBook(data);
         } catch (err) {
             console.log(err);

@@ -51,8 +51,9 @@ const EditForm = ({ currentBook }) => {
             })
             if (response.status === 201) {
                 userContext.getUser();
-                history.push(`/read-books/${currentBook._id}`);
                 setValues(values);
+                userContext.setUserUpdates=(userContext.userUpdates+1);
+                history.push(`/read-books/${currentBook._id}`);
             } else {
                 alert('Something went wrong. Please try again');
             }
