@@ -5,7 +5,7 @@ import EditForm from '../EditForm';
 
 const ReadBook = (props) => {
     
-    const API_ENDPOINT = `http://localhost:4000/read-books/book/${props.match.params.bookId}`;
+    const API_ENDPOINT = `https://bookstop-api.herokuapp.com/read-books/book/${props.match.params.bookId}`;
     const userContext = useContext(UserContext);
     const history = useHistory();
 
@@ -21,7 +21,7 @@ const ReadBook = (props) => {
     }
 
     const _handleDelete = async (e) => {
-        const API_ENDPOINT = `http://localhost:4000/read-books/${props.match.params.bookId}`;
+        const API_ENDPOINT = `https://bookstop-api.herokuapp.com/read-books/${props.match.params.bookId}`;
         if (window.confirm('Are you sure you want to delete?')) {
             try {
                 const deletedBook = await fetch(API_ENDPOINT, { method: 'DELETE'});

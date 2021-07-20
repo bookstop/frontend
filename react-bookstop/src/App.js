@@ -84,7 +84,7 @@ function App() {
     // recently and browsed the site, which is tracked by the lastAccess value.
 
     try {
-      const API_ENDPOINT = `http://localhost:4000/users/${userID}`;
+      const API_ENDPOINT = `https://bookstop-api.herokuapp.com/users/${userID}`;
       const response = await fetch (API_ENDPOINT);
       const data = await response.json();
       
@@ -115,7 +115,7 @@ function App() {
   // We do this so we know when the user is inactive, in which case we consider them logged off.
 
   const _userSessionKeepAlive = async () => {
-    const API_ENDPOINT = `http://localhost:4000/users/status:${userAuth._id}`;
+    const API_ENDPOINT = `https://bookstop-api.herokuapp.com/users/status:${userAuth._id}`;
     //console.log(values)
     try {
         const response = await fetch(API_ENDPOINT, {

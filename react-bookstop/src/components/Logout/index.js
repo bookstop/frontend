@@ -12,7 +12,7 @@ const Logout = (props) => {
     const _handleUserLogout = async () => {
         
         try {
-            const API_ENDPOINT = 'http://localhost:4000/users/logout/user';
+            const API_ENDPOINT = 'https://bookstop-api.herokuapp.com/users/logout/user';
             const response = await fetch(API_ENDPOINT, {
                 method: 'PUT',
                 body: JSON.stringify({_id: userAuth._id}),

@@ -25,7 +25,7 @@ const LoginForm = (props) => {
         setFormStatus({showStatus:true, showSpinner:true, message: ""});
         event.preventDefault();
         try {
-            const API_ENDPOINT = 'http://localhost:4000/users/login';
+            const API_ENDPOINT = 'https://bookstop-api.herokuapp.com/users/login';
             const response = await fetch(API_ENDPOINT, {
                 method: 'POST',
                 body: JSON.stringify(values),
