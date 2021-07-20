@@ -9,7 +9,7 @@ export default function Header(){
         <div className='header-wrapper'>
           <div className='main-info'>
 
-          { ((userAuth) && (userAuth.status==='active') && ((Date.now()-userAuth.lastAccess)<900) ) ? 
+          { ((userAuth) && (userAuth.status==='active') && ((Date.now()-userAuth.lastAccess)<900000) ) ? 
              (
                <>
               <h3 className='welcome-harry'>Welcome Back {userAuth.firstName}!</h3>

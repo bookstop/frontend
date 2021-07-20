@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 
 const WishEditForm = ({ wishListBook }) => {
-    console.log(wishListBook);
+    // console.log(wishListBook);
     const API_ENDPOINT = `https://bookstop-api.herokuapp.com/wish-lists/${wishListBook._id}`;
 
     const [values, setValues] = useState(wishListBook);
@@ -24,7 +24,7 @@ const WishEditForm = ({ wishListBook }) => {
 
     const _updateBook = async (e) => {
         e.preventDefault();
-        console.log('values:' , values);
+        // console.log('values:' , values);
         try {
             const newValues = {};
             if (values.author !== '') {
@@ -48,9 +48,10 @@ const WishEditForm = ({ wishListBook }) => {
             })
             if (response.status === 201) {
                 userContext.getUser();
-                history.push(`/wish-lists/${wishListBook._id}`);
+                userContext.setUserUpdates=(userContext.userUpdates+1);
                 setValues(values);
-                console.log('changing book')
+                history.push(`/wish-lists/${wishListBook._id}`);
+                // console.log('changing book')
             } else {
                 alert('Something went wrong. Please try again');
             }

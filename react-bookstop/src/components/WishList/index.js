@@ -33,13 +33,13 @@ const WishList = () => {
 
                     userContext.user.wishList.map((book) => {
                         return (
-                            <div key={book._id} className="book-list ">
+                            <div key={book._id} className="book-list "  data-update={userContext.userUpdates}>
                                 {/* <Link to={`/wish-book/${book._id}`}>
                                     <h2>{book.title}</h2>
                                 </Link>
                                 <h3>{book.author}</h3> */}
                                 <p className=' readbook-heading'>Title:</p>
-                                <Link to={`/wish-books/${book._id}`}>
+                                <Link to={`/wish-book/${book._id}`}>
                                     
                                     <h2 className='titles-author'>{book.title}</h2>
                                 </Link>

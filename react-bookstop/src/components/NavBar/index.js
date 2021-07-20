@@ -32,8 +32,11 @@ export default function Nav(){
         <Link className="nav-link borderlight Link" to="/searchbooks">Search Books</Link>
         </li>
 
-        { ((!userAuth) || (userAuth.status!=='active') || ((Date.now()-userAuth.lastAccess)>900) ) ? (
-            <li className="nav-item">
+        { ((!userAuth) || (userAuth.status!=='active') || ((Date.now()-userAuth.lastAccess)>900000) ) ? (
+          
+          
+          <li className="nav-item">
+         
             <Link className="nav-link borderlight Link" to="/login">Log In</Link>
             </li>
           )  :  (

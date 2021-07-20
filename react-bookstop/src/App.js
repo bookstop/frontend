@@ -3,13 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';   //minimizing bootstrap use
 import './App.css';
 
 import { useLocation } from "react-router-dom";
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import { useState, useEffect, useContext, createContext, useReducer } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { useState, useEffect, useReducer } from 'react';
 
 import Navbar from './components/NavBar';
-import SearchForm from './components/SearchForm';
 import RegisterForm from './components/RegisterForm';
-import ReadBooks from './components/ReadBooks';
 import Home from './components/Home';
 import LoginForm from './components/LoginForm';
 import Logout from './components/Logout';
@@ -24,9 +22,11 @@ export const UserContext = React.createContext();
 export const UserAuthStatusContext = React.createContext();
 export const UserAuthDispatchContext = React.createContext(); 
 
+
 function App() {
   const [currentBook, setCurrentBook] = useState(null);
   const [wishListBook, setWishListBook] = useState(null);
+  const [userUpdates, setUserUpdates] = useState(1);
   const [user, setUser] = useState(false);
   let location = useLocation();
   
@@ -67,7 +67,7 @@ function App() {
 
     // Check to see if the user is already logged in with a valid session
     // Sessions are valid for 30 minutes since the user's last interaction with the site
-    if ( (userAuth) && (userAuth._id) && (userAuth.status==='active') && ( (Date.now()-userAuth.lastAccess)<900) ) {
+    if ( (userAuth) && (userAuth._id) && (userAuth.status==='active') && ( (Date.now()-userAuth.lastAccess)<900000) ) {
         return;
     }
 
@@ -89,6 +89,7 @@ function App() {
       const data = await response.json();
       
       setUser(data);
+      setUserUpdates(userUpdates+1);
 
       const userAuthUpdate = { _id: data._id, 
         username: data.username,
@@ -108,6 +109,7 @@ function App() {
   // Get the logged in user when this page mounts or reloads
   useEffect(() => {
     getUser();
+    setUserUpdates(userUpdates+1);
     // eslint-disable-next-line
   }, [userAuth, location]);
 
@@ -156,14 +158,16 @@ function App() {
     // eslint-disable-next-line
   }, [location] );
 
-
+  
   return (
 
     <BrowserRouter>
     <UserAuthStatusContext.Provider value={userAuth}>
       <UserAuthDispatchContext.Provider value={dispatch}>   
         <UserContext.Provider value={{
-              user, 
+              user,
+              userUpdates,
+              setUserUpdates,
               getUser,
               setUser,
               currentBook,
@@ -194,7 +198,7 @@ function App() {
               path='/wish-book/:bookId'
               component={WishBook}
             />
-                
+
             <Route
               path='/register'
               component={RegisterForm}

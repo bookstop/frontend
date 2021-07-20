@@ -21,7 +21,8 @@ const ReadBooks = () => {
 
     return (
          <>
-        <div ref={compRef} className="header-offset-div"></div> {/* Define a node reference to this component */}
+         
+        <div ref={compRef} className="header-offset-div" data-update={userContext.userUpdates}></div> {/* Define a node reference to this component */}
           <div> 
 
             <CreateReadForm />
