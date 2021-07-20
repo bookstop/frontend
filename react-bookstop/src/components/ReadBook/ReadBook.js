@@ -42,12 +42,15 @@ const ReadBook = (props) => {
         getBook();
     }, []);
     
-    if (!userContext.currentBook) return <h1>Finding your book on the shelf!</h1>
+    if ( ( userContext.currentBook === undefined ) || 
+        ( userContext.currentBook === null )  ) {
+            return <h1>Finding your book on the shelf!</h1>
+    }
 
     return (
         <div className='read-list-data col-lg-6 col-xm-12'>
-            <h1>{currentBook.title}</h1>
-            <h2>{currentBook.author}</h2>
+            <h1>{userContext.currentBook.title}</h1>
+            <h2>{userContext.currentBook.author}</h2>
             <Link className='btn' to={`/read-books/edit/${props.match.params.bookId}`}>Edit</Link>
             <button className='btn' onClick={_handleDelete}>Delete</button>            
         </div>
