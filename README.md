@@ -1,6 +1,10 @@
 # BookStop
 ### Project Description
 BookStop is a React app that works with the BookStop API server-side. The app allows a user to log in, track books they have already read and books they want to read in two separate lists, and search for new reads using the Google API.
+
+### Deployed App
+https://bookstop-books.netlify.app/
+
 ### Technologies Used
 1. React
 2. Bootstrap
